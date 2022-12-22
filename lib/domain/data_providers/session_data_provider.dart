@@ -7,16 +7,15 @@ abstract class SessionDataProviderKeys {
 class SessionDataProvider {
   final _sharedPreferences = SharedPreferences.getInstance();
 
-  Future<String?> apiKey() async {
-    return (await _sharedPreferences)
-        .getString(SessionDataProviderKeys._apiKey);
+  Future<String?> loadLocalApiKey() async {   //загрузка локалього апи ключа (либо есть либо null)
+    return (await _sharedPreferences).getString(SessionDataProviderKeys._apiKey);
   }
 
-  Future<void> saveApiKey(String key) async {
+  Future<void> saveApiKey(String key) async { //сохранение апи ключа в локал. хран.
     (await _sharedPreferences).setString(SessionDataProviderKeys._apiKey, key);
   }
 
-  Future<void> clearApiKey() async {
+  Future<void> clearApiKey() async {    //удал. апи ключа из хранилища
     (await _sharedPreferences).remove(SessionDataProviderKeys._apiKey);
   }
 }
